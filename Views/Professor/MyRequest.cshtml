@@ -1,0 +1,97 @@
+@model ContosoUniversity.Models.TeachingRequest
+
+@{
+    ViewData["Title"] = "RequestView";
+}
+
+<h2>RequestView</h2>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ListOfCourses)
+        </dt>
+        <dd>
+            <table class="table" style="margin: 50px    ">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Preference</th>
+                </tr>
+                @foreach (var item in Model.ListOfCourses)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SelectedCourses.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Choice)
+                        </td>
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.)
+                    </td>*@
+                        @*<td>
+                        <a asp-action="MyAssignment" asp-route-id="@item.AssignmentID">Browse course</a> |
+                    </td>*@
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+    </dl>
+</div>
+
+@*<form asp-action="RequestView">
+    <div class="form-horizontal">
+        <h4>TeachingRequest</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="SemesterID" />
+    <input type="hidden" asp-for="ProfessorID" />
+        <div class="form-group">
+            <label asp-for="Annotation" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Annotation" class="form-control" />
+                <span asp-validation-for="Annotation" class="text-danger" />
+            </div>
+        </div>
+        <table class="table" style="margin: 50px    ">
+            <tr>
+                <th>Course Title</th>
+                <th>Preference</th>
+            </tr>
+            @foreach (var item in Model.ListOfCourses)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SelectedCourses.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Choice)
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>*@
+
+<div>
+    <a asp-action="DeleteRequest" asp-route-SemesterID="@Model.SemesterID" asp-route-ProfessorID="@Model.ProfessorID">Delete this request</a> |
+    <a asp-action="Index">Back to Main Page</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

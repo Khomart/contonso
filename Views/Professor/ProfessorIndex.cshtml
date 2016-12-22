@@ -1,0 +1,128 @@
+﻿@model ContosoUniversity.Models.SchoolViewModels.ProfessorViews
+@{
+    ViewData["Title"] = "Professor Page";
+}
+
+<div class="jumbotron">
+    <h1>Comcordia University Professor Page!</h1>
+</div>
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>Professor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Professors.HireDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Professors.HireDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Professors.FirstMidName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Professors.FirstMidName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Professors.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Professors.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Professors.Courses)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Course Title</th>
+                    <th></th>
+                    <th>Browse course</th>
+                </tr>
+                @foreach (var item in Model.CoursesAssignments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Course.Title)
+                        </td>
+                        <td></td>
+                        <td>
+                            <a asp-action="MyAssignment" asp-route-id="@item.AssignmentID">Browse course</a> |
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+        <dt>My requests</dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Semester</th>
+                    <th>Approved</th>
+                    <th>Browse request</th>
+                </tr>
+                @foreach (var item in Model.Requests)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SemesterForAssignment.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Approved)
+                        </td>
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.)
+                    </td>*@
+                        <td>
+                            <a asp-action="MyRequest"   asp-route-SemesterID="@item.SemesterID" asp-route-ProfessorID="@item.ProfessorID">Edit Request</a> |
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        <dt>Request Course</dt>
+        <dd>
+            <form asp-action="CoursesToChoose">
+                <div class="form-group">
+                    <label for="semester">Semester:</label>
+                    <select id="semester" name="sem" class="form-control" asp-items="@ViewBag.Semesters"></select>
+                </div>
+                <input type="submit" value="Request" class="btn btn-default" />
+            </form>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Professors.Commities)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Browse course</th>
+                    <th><a asp-action="JoinCommitee" @*asp-route-id="@item.AssignmentID" *@>Join Commitee</a></th>
+                </tr>
+                @foreach (var item in Model.Membership)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Committee.Title)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.)
+                        </td>*@
+                        <td>
+                            <a asp-action="MyCommittee" @*asp-route-id="@item.AssignmentID"*@>Browse Committee</a> |
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="ProfessorCoursesEdit" asp-route-id="@Model.Professors.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

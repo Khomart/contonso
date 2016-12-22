@@ -1,0 +1,61 @@
+@model ContosoUniversity.Models.Committee
+
+<form asp-action="View">
+    <div class="form-horizontal">
+        <h4>Committee Level</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Title" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="DepartmentID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="DepartmentID" class ="form-control" asp-items="ViewBag.DepartmentID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FacultyID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="FacultyID" class ="form-control" asp-items="ViewBag.FacultyID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Level" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="Level" class="form-control"></select>
+                <span asp-validation-for="Level" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProfessorID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ProfessorID" class ="form-control" asp-items="ViewBag.ProfessorID"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="StartDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
